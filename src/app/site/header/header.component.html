@@ -1,0 +1,48 @@
+<header>
+<nav class="navbar navbar-expand-md">
+  <!-- <div class="container-fluid"> -->
+        <div class="navbar-header">
+          <img src="https://cdn3.iconfinder.com/data/icons/line/36/movie_camera-512.png" alt="logo" height="50px" width="50px">
+            <a class="navbar-brand" href="#">Movie Cruiser</a>
+            <!-- <h1>hTrack</h1> -->
+        </div>
+                      <!-- Toggler/collapsible Button -->
+            <button class="navbar-toggler  navbar-dark" type="button" data-toggle="collapse" data-target="#truyum-movieList">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+       
+              <div class="collapse navbar-collapse" id="truyum-movieList">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item" > 
+                <a class="nav-link" routerLink="movieList">
+                  <span class="veralign">Movie Items</span>
+                </a>
+              </li>
+              <li class="nav-item" *ngIf="isAuthenticated() && !isAdmin()">
+                  <a class="nav-link" routerLink="favorites">
+                      <span class="veralign">Favorites</span>
+                  </a>
+              </li>
+              <li class="nav-item" *ngIf="isAuthenticated()">
+                <a class="nav-link" routerLink="" >
+                    <i class="material-icons nav-icon-size">person</i>
+                    <span class="veralign">{{getUser().firstName}} {{getUser().lastName}}</span>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="!isAuthenticated()">
+              <a class="nav-link" routerLink="signup">Sign Up</a>
+          </li>
+          <li class="nav-item" *ngIf="!isAuthenticated()">
+            <a class="nav-link" routerLink="login">Log In</a>
+          </li>
+              <li class="nav-item" *ngIf="isAuthenticated()">
+                  <a class="nav-link" routerLink="login" href="" (click)="onLogOut()" >
+                      <span class="veralign">Logout</span>
+                  </a>
+              </li>
+            </ul>
+        </div>
+  <!-- </div> -->
+ 
+</nav>
+</header>

@@ -1,0 +1,11 @@
+<app-banner></app-banner> 
+<!-- MENU ITEM LIST -->
+<div class="container-fluid">
+  <div class="card-deck add-to-cart mb-5 pb-5">
+      <app-movie-info  *ngFor="let movieItem of filteredMovieItems;" [movieItem]="movieItem" (addToFavoritesRequested)="addToFavorites($event)"  >
+              
+      </app-movie-info>
+  </div>
+</div>
+
+

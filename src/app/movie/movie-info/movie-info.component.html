@@ -1,0 +1,72 @@
+
+<ng-template *ngIf="isEditAllowed(); then adminlist; else customerlist;"></ng-template>
+<!-- MENU LIST CUSTOMER -->
+<ng-template #customerlist>
+
+    <div class="card mt-4">
+        <img class="card-img-top movie-poster" [src]="movieItem.imageUrl" alt="Card image cap">                            
+            <div class="card-body pr-3 pl-3 pb-3">
+                <div class="row">
+                    <h5 class="col">
+                     <label name="title">{{movieItem.title}}</label>
+                    </h5>
+                    <label name="boxOffice" class="float-left text-danger pr-3 font-boxOffice">${{movieItem.boxOffice}}</label>
+                </div>
+                 
+                <div class="card-subtitle text-muted">
+                    <label name="category">{{movieItem.genre}}</label>
+                    <span *ngIf="movieItem.hasTeaser" class="float-right ml-auto">
+                        <i class="material-icons" id="icon-teaser">video_library</i>
+                        <span class="badge mt-1 pt-1 pb-1"  id="badge-teaser">Teaser</span>
+                    </span>
+
+                </div>
+                <div *ngIf="this.favoritesService.movieItemAdded && this.favoritesService.movieItemtobeAdded.id == movieItem.id" class="alert alert-success alert-dismissible fade show alert-msg font-size-small" role="alert">
+                    Movie added to favorites successfully.
+                </div>
+                <div *ngIf="this.favoritesService.alreadyExists && (this.favoritesService.movieItemtobeAdded.id == movieItem.id)" class="alert alert-danger alert-dismissible fade show alert-msg font-size-small" role="alert">
+                    Movie already exists in favorites.
+                </div>
+              
+                <button type="button" class="btn btn-success float-right"  (click)="onAddToFavorites(movieItem.id)">
+                        <i class="material-icons veralign add-icon">library_add</i>
+                        Add to Favorites
+                    </button>
+            </div>
+    </div>
+</ng-template>
+
+<!-- MENU LIST ADMIN -->
+<ng-template #adminlist>
+    <div class="card mt-4 justify-content-center">
+        <img class="card-img-top movie-poster" [src]="movieItem.imageUrl" alt="Card image cap">
+        <div class="card-body pr-3 pl-3 pb-1">
+            <div class="row">
+                <h5 class="col">
+                 <label name="title">{{movieItem.title}}</label>
+                </h5>
+                <label name="boxOffice" class="float-left text-danger pr-3 font-boxOffice">${{movieItem.boxOffice}}</label>
+            </div>
+            
+            <div class="card-subtitle text-muted">
+                <span  *ngIf="movieItem.active" class="badge badge-success veralign pt-1 pb-1">Active</span>
+                <span  *ngIf="!movieItem.active" class="badge badge-danger veralign pt-1 pb-1">Inactive</span>
+                <label name="genre">{{movieItem.genre}}</label>
+                <span *ngIf="movieItem.hasTeaser" class="float-right ml-auto">
+                    <i class="material-icons" id="icon-teaser">video_library</i>
+                    <span class="badge mt-1 pt-1 pb-1"  id="badge-teaser">Teaser</span>
+                </span>
+
+            </div>
+            <span class="text-muted float-left mt-0 pt-0">
+                <i class="material-icons icon-size mb-0 pd-0">access_time</i>
+                <label class="icon-size mb-0 pd-0">Launch</label>
+                <label id="dateofLaunch" name="date" class="d-block mt-0 pd-0"> {{movieItem.dateOfLaunch | date : 'mediumDate'}}</label>
+            </span>
+            <button type="button" class="btn btn-success float-right mt-1" [routerLink]="['/edit-movie-item',movieItem.id]">
+                    <i class="material-icons veralign">edit</i>
+                    Edit
+                </button>
+        </div>
+</div>
+</ng-template>

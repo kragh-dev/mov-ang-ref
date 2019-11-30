@@ -1,0 +1,36 @@
+<div class="container mt-4 pt-4 pb-4">
+    <div class="alert alert-secondary mt-4 col-md-6 mx-auto" *ngIf="favorites.favoritesItems === null || favorites.favoritesItems.length === 0; else favoritesItems">No items in favorites. Use 'Add to Favorites' option in Movie list.</div>
+    <ng-template #favoritesItems>
+    <div class="list-group mx-auto col-md-6">
+        <div class="pt-4">
+            <h2 class=" mt-5">Favorites</h2>
+        </div>
+        <!-- ITEM 1 -->
+        <div class="list-group-item pl-4" *ngFor="let favoritesItem of favorites.favoritesItems">
+            <div>
+                <label class="list-group-item-heading text-muted"><h3>{{favoritesItem.movieItem.title}}</h3></label>
+                <span class="float-right text-danger mt-1">
+                    <label name="price">$ {{favoritesItem.movieItem.boxOffice}}</label>
+                </span>
+            </div>   
+            <a (click)="onRemoveFavoritesItem(favoritesItem.itemId)" class="list-group-item-text float-right"><i class="material-icons delete-icon text-muted">delete_forever</i></a>
+        </div>
+  
+       
+         <!-- NUMBER OF FAVORITES -->
+         <div class="list-group-item pl-4">
+            <div>
+                <label class="list-group-item-heading"><h2>No. of Favorites</h2></label>
+                <span class="float-right text-danger mt-2">
+                    <h4 name="price">{{favorites.noOfFavorites}}</h4>
+                </span>
+            </div>   
+        </div>
+
+       
+
+
+
+    </div>
+  </ng-template>
+  </div>
